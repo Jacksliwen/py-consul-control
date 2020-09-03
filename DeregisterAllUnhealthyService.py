@@ -21,7 +21,7 @@ for each in res:
     req = requests.get(each_url)
     each_res = json.loads(req.content)
     for each_service in each_res:
-        if each_res[each_service]["Status"] != "passing":
+        if each_res[each_service]["Status"] == "critical":
             url = 'http://'+ each["Addr"] + ':8500/v1/agent/service/deregister/' + each_res[each_service]["ServiceID"]
             req = requests.put(url)
             print(each["Addr"] + " deregister [ " + each_res[each_service]["ServiceID"] + " ] ")
